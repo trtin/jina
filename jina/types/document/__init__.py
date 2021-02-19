@@ -13,6 +13,7 @@ import numpy as np
 from google.protobuf import json_format
 from google.protobuf.field_mask_pb2 import FieldMask
 
+from .traversable import Traversable
 from .converters import png_to_buffer, to_datauri, guess_mime, to_image_blob
 from ..mixin import ProtoTypeMixin
 from ..ndarray.generic import NdArray
@@ -37,7 +38,7 @@ _document_fields = set(list(jina_pb2.DocumentProto().DESCRIPTOR.fields_by_camelc
     jina_pb2.DocumentProto().DESCRIPTOR.fields_by_name))
 
 
-class Document(ProtoTypeMixin):
+class Document(ProtoTypeMixin, Traversable):
     """
     :class:`Document` is one of the **primitive data type** in Jina.
 
@@ -845,7 +846,7 @@ class Document(ProtoTypeMixin):
         mermaid_str = """
 %%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#FFC666'}}}%%
 classDiagram
-        
+
         """ + self.__mermaid_str__()
 
         encoded_str = base64.b64encode(bytes(mermaid_str.strip(), 'utf-8')).decode('utf-8')

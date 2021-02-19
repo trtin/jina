@@ -2,14 +2,14 @@ from typing import List, Any, Union
 
 import numpy as np
 
-from . import BaseExecutableDriver, FastRecursiveMixin
+from . import BaseExecutableDriver, FlatRecursiveMixin
 from ..helper import typename
 
 if False:
     from ..types.sets import DocumentSet
 
 
-class BasePredictDriver(FastRecursiveMixin, BaseExecutableDriver):
+class BasePredictDriver(FlatRecursiveMixin, BaseExecutableDriver):
     """Drivers inherited from this Driver will bind :meth:`predict` by default """
 
     def __init__(self, executor: str = None, method: str = 'predict', *args, **kwargs):
