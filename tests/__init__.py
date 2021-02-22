@@ -47,3 +47,9 @@ def rm_files(file_paths):
             elif os.path.isdir(file_path):
                 shutil.rmtree(file_path, ignore_errors=False, onerror=None)
 
+
+def validate_callback(mock, validate_func):
+    for args, kwargs in mock.call_args_list:
+        validate_func(*args, **kwargs)
+
+    mock.assert_called()
